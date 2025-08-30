@@ -14,15 +14,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String   @id @default(cuid())
-  clerkUserId String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
-  workflows Workflow[]
-  name      String
+  id          String     @id @default(cuid())
+  clerkUserId String     @unique
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  email       String     @unique
+  workflows   Workflow[]
+  name        String
 }
 
 model Workflow {
@@ -31,42 +30,42 @@ model Workflow {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String
-  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   nodes     Node[]
   edges     Edge[]
 }
 
 model Node {
-  id       String @id @default(cuid())
-  nodeId   String @unique
-  type     NodeType
-  positionX Float
-  positionY Float
-  data     Json   @default("{}")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  workflowId String
-  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  id             String   @id @default(cuid())
+  nodeId         String   @unique
+  type           NodeType
+  positionX      Float
+  positionY      Float
+  data           Json     @default("{}")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  measuredWidth  Float?
+  measuredHeight Float?
+  workflowId     String
+  workflow       Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
 
   sourceEdges Edge[] @relation("SourceNode")
   targetEdges Edge[] @relation("TargetNode")
 }
 
 model Edge {
-  id       String @id @default(cuid())
-  edgeId String @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  edgeId     String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   workflowId String
   workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
 
   sourceNodeId String
-  sourceNode   Node @relation("SourceNode", fields: [sourceNodeId], references: [id], onDelete: Cascade)
-  
+  sourceNode   Node   @relation("SourceNode", fields: [sourceNodeId], references: [id], onDelete: Cascade)
+
   targetNodeId String
-  targetNode   Node @relation("TargetNode", fields: [targetNodeId], references: [id], onDelete: Cascade)
-  
+  targetNode   Node   @relation("TargetNode", fields: [targetNodeId], references: [id], onDelete: Cascade)
 }
 
 enum NodeType {
