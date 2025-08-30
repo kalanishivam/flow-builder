@@ -6,7 +6,7 @@ import {
   useEdgesState,
   NodeProps, type Edge,
   NodeResizer, type Node, Connection,
-  EdgeChange } from '@xyflow/react';
+  EdgeChange   } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useFlowContext } from '@/context/FlowContext';
 import { nodeTypes } from '@/lib/nodeTypes';
@@ -20,11 +20,12 @@ import { nodeTypes } from '@/lib/nodeTypes';
 
 const NewProject = () => {
  
-  const {nodes, onNodesChange ,edges , onEdgesChange , onConnect} = useFlowContext();
+  const {nodes, onNodesChange ,edges , onEdgesChange , onConnect ,isValidConnection} = useFlowContext();
 
   
   return (
     <div className='w-full h-[90vh]'>
+       {/* <ReactFlowProvider> */}
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={nodes}
@@ -32,6 +33,7 @@ const NewProject = () => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        isValidConnection={isValidConnection}
         fitView
       >
         <MiniMap />
@@ -39,6 +41,7 @@ const NewProject = () => {
         <NodeResizer />
         <Background />
       </ReactFlow>
+      {/* </ReactFlowProvider> */}
     </div>
   )
 }

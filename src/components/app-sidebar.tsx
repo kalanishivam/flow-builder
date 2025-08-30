@@ -1,4 +1,5 @@
 "use client"
+import { createWorkFlow } from "@/actions/flow-actions";
 import {
   Sidebar,
   SidebarContent,
@@ -22,7 +23,8 @@ export function AppSidebar() {
     const handleSave = async () =>{
         try{
           console.log(nodes);
-          console.log(edges)
+          console.log(edges);
+          const saveWorkFlow = await createWorkFlow(nodes , edges);
         }catch(error){
 
         }

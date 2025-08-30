@@ -12,4 +12,26 @@ export type FlowContextType = {
   setEdges: Dispatch<SetStateAction<Edge[]>>;
   onEdgesChange: (changes: EdgeChange[]) => void
   onConnect: (params: Connection) => void
+  isValidConnection: (connection: Connection | Edge) => boolean
 };
+
+
+export interface NodeBE {
+  id: string;
+  position?: {
+    x: number;
+    y: number;
+  };
+  data?: Record<string, unknown>;
+  type? : string;
+  measured?: {
+    width?: number;
+    height?: number;
+  };
+}
+
+export interface EdgeBE {
+  id: string;
+  source: string;
+  target: string;
+}
