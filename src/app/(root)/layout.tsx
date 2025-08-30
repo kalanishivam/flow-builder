@@ -1,13 +1,15 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { FlowNodeContextProvider } from "@/context/FlowNodeContext"
- 
+import Navbar from "@/components/Navbar"
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="w-full">
+    return (
         <FlowNodeContextProvider>
-        {children}
+            <Navbar />
+            <div className="w-full container mx-auto">
+                {children}
+            </div>
         </FlowNodeContextProvider>
-    </div>
-  )
+    )
 }
