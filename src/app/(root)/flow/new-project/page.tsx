@@ -1,12 +1,6 @@
 "use client"
 import React from 'react'
-import { useState, useCallback } from 'react';
-import {
-  ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, MiniMap, Controls, Background, useNodesState,
-  useEdgesState,
-  NodeProps, type Edge,
-  NodeResizer, type Node, Connection,
-  EdgeChange   } from '@xyflow/react';
+import { ReactFlow,  MiniMap, Controls, Background,NodeResizer   } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useFlowContext } from '@/context/FlowContext';
 import { nodeTypes } from '@/lib/nodeTypes';

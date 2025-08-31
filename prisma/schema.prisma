@@ -38,7 +38,7 @@ model Workflow {
 model Node {
   id             String   @id @default(cuid())
   nodeId         String   @unique
-  type           NodeType
+  type           String
   positionX      Float
   positionY      Float
   data           Json     @default("{}")
@@ -66,9 +66,4 @@ model Edge {
 
   targetNodeId String
   targetNode   Node   @relation("TargetNode", fields: [targetNodeId], references: [id], onDelete: Cascade)
-}
-
-enum NodeType {
-  sendMessage
-  recipient
 }

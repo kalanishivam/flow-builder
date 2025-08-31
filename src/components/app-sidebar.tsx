@@ -1,5 +1,4 @@
 "use client"
-import { createWorkFlow } from "@/actions/flow-actions";
 import {
   Sidebar,
   SidebarContent,
@@ -13,23 +12,14 @@ import {
 } from "@/components/ui/sidebar"
 import { sideBarOptions } from "@/constants"
 import { useFlowContext } from "@/context/FlowContext"
-import { Loader2Icon, Save } from "lucide-react";
-import { useState } from "react";
+import { Home } from "lucide-react";
+import DialogSaveFlow from "./DialogSaveFlow";
+import Link from "next/link";
 
 export function AppSidebar() {
-    const {addNode , nodes , edges} = useFlowContext();
-    const [loaderForSaveFlow , setLoaderForSaveFlow] = useState(false);
+  const { addNode, } = useFlowContext();
+  
 
-    const handleSave = async () =>{
-        try{
-          console.log(nodes);
-          console.log(edges);
-          const saveWorkFlow = await createWorkFlow(nodes , edges);
-        }catch(error){
-
-        }
-    }
-    
   return (
     <Sidebar collapsible="icon" >
       <SidebarHeader>
@@ -39,21 +29,30 @@ export function AppSidebar() {
         <SidebarGroup />
         <SidebarGroupLabel className="text-md font-normal pl-2 md:pl-4">Add Node</SidebarGroupLabel>
         <SidebarGroupContent className="mt-4">
-            <SidebarMenu className="space-y-2">
-                {sideBarOptions.map((item , index)=>(
-                    <SidebarMenuButton key = {index}>
-                         <p onClick={()=>{addNode(item.type)}} className="text-[1rem] font-normal flex gap-3 items-center" > <item.icon className={item.messageStyle + 'size-6 group-data-[state=collapsed]:size-8'} /> <span> {item.title}</span></p>
-                    </SidebarMenuButton>
-                ))}
-            </SidebarMenu>
+          <SidebarMenu className="space-y-2">
+            {sideBarOptions.map((item, index) => (
+              <SidebarMenuButton key={index}>
+                <p onClick={() => { addNode(item.type) }} className="text-[1rem] font-normal flex gap-3 items-center" > <item.icon className={item.messageStyle + 'size-6 group-data-[state=collapsed]:size-8'} /> <span> {item.title}</span></p>
+              </SidebarMenuButton>
+            ))}
+          </SidebarMenu>
         </SidebarGroupContent>
+          
+        <SidebarGroupLabel className="text-md font-normal pl-2 md:pl-4">Tabs</SidebarGroupLabel>
+        <SidebarGroupContent className="mt-4">
+          <SidebarMenu className="space-y-2">
+            <SidebarMenuButton>
+                 <Link href = "/" className="text-[1rem] font-normal flex gap-3 items-center"> <Home className="size-6 group-data-[state=collapsed]:size-6" /> <span>Home</span></Link>
+            </SidebarMenuButton>
+          </SidebarMenu>
+        </SidebarGroupContent>
+       
         <SidebarGroup />
-        
       </SidebarContent>
       <SidebarFooter>
         <SidebarGroup>
           <SidebarMenu>
-            <SidebarMenuButton onClick={handleSave} disabled = {loaderForSaveFlow} className="text-[1rem] font-normal text-center flex gap-3 items-center bg-blue-400 hover:bg-blue-500 text-white hover:text-white "> { loaderForSaveFlow ? <Loader2Icon className="animate-spin" />  : <Save className="  size-6 group-data-[state=collapsed]:size-8" /> } Save Flow</SidebarMenuButton>
+           <DialogSaveFlow />
           </SidebarMenu>
         </SidebarGroup>
       </SidebarFooter>

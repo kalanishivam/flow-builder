@@ -1,6 +1,6 @@
 "use client"
 import { FlowContextType } from "@/types";
-import { addEdge, Connection, type Edge, EdgeChange, type Node, useEdgesState, useNodesState,useReactFlow,getOutgoers,  } from "@xyflow/react";
+import { addEdge, Connection, type Edge, type Node, useEdgesState, useNodesState,useReactFlow,getOutgoers,  } from "@xyflow/react";
 import { createContext, useCallback, useContext,} from "react";
 import cuid from "cuid";
 
@@ -13,7 +13,6 @@ export const FlowContextProvider = ({ children }: { children: React.ReactNode })
     const { getNodes, getEdges } = useReactFlow();
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-    
     const onConnect = useCallback(
         (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
         [setEdges],
@@ -46,7 +45,6 @@ export const FlowContextProvider = ({ children }: { children: React.ReactNode })
 
     const addNode = useCallback((type: string) => {
         setNodes((prevNodes: Node[]) => {
-            const yPos = prevNodes.length === 0 ? 50 : 50 + 50 * prevNodes.length;
             return [
                 ...prevNodes,
                 {

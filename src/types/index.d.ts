@@ -23,7 +23,7 @@ export interface NodeBE {
     y: number;
   };
   data?: Record<string, unknown>;
-  type? : string;
+  type? : string | undefined;
   measured?: {
     width?: number;
     height?: number;
@@ -34,4 +34,70 @@ export interface EdgeBE {
   id: string;
   source: string;
   target: string;
+}
+
+enum TypeOfNode {
+  sendMessage = "sendMessage",
+  recipient = "recipient",
+}
+
+export interface WorkFlowType {
+    userId: string;
+    id: string;
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export export interface FlowDetails {
+  nodes: {
+    id: string;
+    data: JsonValue;
+    nodeId: string;
+    type: string;
+    positionX: number;
+    positionY: number;
+    measuredWidth: number | null;
+    measuredHeight: number | null;
+    workflowId: string;
+  }[];
+  edges: {
+    // id: string;
+    // createdAt: Date;
+    // updatedAt: Date;
+    // workflowId: string;
+    edgeId: string;
+    sourceNode: {
+            nodeId: string;
+        };
+        targetNode: {
+            nodeId: string;
+        };
+  }[];
+  userId: string;
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export type NodeDb = {
+    id: string;
+    data: JsonValue;
+    nodeId: string;
+    type: string;
+    positionX: number;
+    positionY: number;
+    measuredWidth: number | null;
+    measuredHeight: number | null;
+    workflowId: string;
+}
+export type EdgeRecord   = {
+  edgeId: string;
+  sourceNode: {
+            nodeId: string;
+        };
+        targetNode: {
+            nodeId: string;
+        };
 }

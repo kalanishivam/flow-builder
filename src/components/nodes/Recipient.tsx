@@ -20,7 +20,7 @@ const Recipient = ({id , data} : NodeProps) => {
             <Mail size={8} />
         </div>
         <div className=''>
-            <input onChange={(e)=>{handlEmailChange(e)}} type='email' value={data.textVal as string || ""} className='w-full h-6 pl-0.5 outline-none focus:ring-0 border-none' placeholder='Enter recipient email'></input>
+            <input onChange={(e)=>{handlEmailChange(e)}} type='email' value={data?.textVal as string || ""} className='w-full h-6 pl-0.5 outline-none focus:ring-0 border-none' placeholder='Enter recipient email'></input>
         </div>
     <Handle type="source"  position={Position.Top} />
     <Handle type="target" position={Position.Bottom} />
